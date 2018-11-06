@@ -1,51 +1,66 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: [:show, :update, :destroy]
+  # Mark this as a JSONAPI controller, associating with the given resource
+  jsonapi resource: TodoResource
 
-  # GET /todos
+  # Reference a strong resource payload defined in
+  # config/initializers/strong_resources.rb
+  strong_resource :todo
+  # Run strong parameter validation for these actions.
+  # Invalid keys will be dropped.
+  # Invalid value types will log or raise based on the configuration
+  # ActionController::Parameters.action_on_invalid_parameters
+  before_action :apply_strong_params, only: [:create, :update]
+
+  # Start with a base scope and pass to render_jsonapi
   def index
-    @todos = Todo.all
-
-    render json: @todos
+    todos = Todo.all
+    render_jsonapi(todos)
   end
 
-  # GET /todos/1
+  # Call jsonapi_scope directly here so we can get behavior like
+  # sparse fieldsets and statistics.
   def show
-    render json: @todo
+    scope = jsonapi_scope(Todo.where(id: params[:id]))
+    instance = scope.resolve.first
+    raise JsonapiCompliable::Errors::RecordNotFound unless instance
+    render_jsonapi(instance, scope: false)
   end
 
-  # POST /todos
+  # jsonapi_create will use the configured Resource (and adapter) to persist.
+  # This will handle nested relationships as well.
+  # On validation errors, render correct error JSON.
   def create
-    @todo = Todo.new(todo_params)
+    todo, success = jsonapi_create.to_a
 
-    if @todo.save
-      render json: @todo, status: :created, location: @todo
+    if success
+      render_jsonapi(todo, scope: false)
     else
-      render json: @todo.errors, status: :unprocessable_entity
+      render_errors_for(todo)
     end
   end
 
-  # PATCH/PUT /todos/1
+  # jsonapi_update will use the configured Resource (and adapter) to persist.
+  # This will handle nested relationships as well.
+  # On validation errors, render correct error JSON.
   def update
-    if @todo.update(todo_params)
-      render json: @todo
+    todo, success = jsonapi_update.to_a
+
+    if success
+      render_jsonapi(todo, scope: false)
     else
-      render json: @todo.errors, status: :unprocessable_entity
+      render_errors_for(todo)
     end
   end
 
-  # DELETE /todos/1
+  # Renders 200 OK with empty meta
+  # http://jsonapi.org/format/#crud-deleting-responses-200
   def destroy
-    @todo.destroy
+    todo, success = jsonapi_destroy.to_a
+
+    if success
+      render json: { meta: {} }
+    else
+      render_errors_for(todo)
+    end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_todo
-      @todo = Todo.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def todo_params
-      params.require(:todo).permit(:title, :owner)
-    end
 end

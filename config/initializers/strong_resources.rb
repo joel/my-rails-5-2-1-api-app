@@ -31,4 +31,8 @@
 #
 # For additional documentation, see https://jsonapi-suite.github.io/strong_resources
 StrongResources.configure do
+  strong_resource :todo do
+    attribute :title, :string
+    attribute :owner, :string
+  end
 end
