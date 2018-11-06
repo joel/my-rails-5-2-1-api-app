@@ -1,5 +1,6 @@
 https://joesasson.github.io/2017/03/24/setting-up-a-rails-app-with-rspec-and-postgres.html
 https://blog.arkency.com/2014/10/how-to-start-using-uuid-in-activerecord-with-postgresql/
+https://lab.io/articles/2017/04/13/uuids-rails-5-1/
 
 rails new rails-5-2-1-api-sample-2 -T -d postgresql --api
 
