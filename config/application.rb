@@ -32,9 +32,9 @@ module Rails521ApiSample2
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     
-    config.generators do |g|
-      g.orm :active_record, primary_key_type: :uuid
-      g.orm :active_record, foreign_key_type: :uuid
+    
+    config.generators do |generate|
+      generate.orm :active_record, primary_key_type: :uuid
     end
   end
 end
