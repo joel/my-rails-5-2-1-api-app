@@ -1,51 +1,66 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :update, :destroy]
+  # Mark this as a JSONAPI controller, associating with the given resource
+  jsonapi resource: ItemResource
 
-  # GET /items
+  # Reference a strong resource payload defined in
+  # config/initializers/strong_resources.rb
+  strong_resource :item
+  # Run strong parameter validation for these actions.
+  # Invalid keys will be dropped.
+  # Invalid value types will log or raise based on the configuration
+  # ActionController::Parameters.action_on_invalid_parameters
+  before_action :apply_strong_params, only: [:create, :update]
+
+  # Start with a base scope and pass to render_jsonapi
   def index
-    @items = Item.all
-
-    render json: @items
+    items = Item.all
+    render_jsonapi(items)
   end
 
-  # GET /items/1
+  # Call jsonapi_scope directly here so we can get behavior like
+  # sparse fieldsets and statistics.
   def show
-    render json: @item
+    scope = jsonapi_scope(Item.where(id: params[:id]))
+    instance = scope.resolve.first
+    raise JsonapiCompliable::Errors::RecordNotFound unless instance
+    render_jsonapi(instance, scope: false)
   end
 
-  # POST /items
+  # jsonapi_create will use the configured Resource (and adapter) to persist.
+  # This will handle nested relationships as well.
+  # On validation errors, render correct error JSON.
   def create
-    @item = Item.new(item_params)
+    item, success = jsonapi_create.to_a
 
-    if @item.save
-      render json: @item, status: :created, location: @item
+    if success
+      render_jsonapi(item, scope: false)
     else
-      render json: @item.errors, status: :unprocessable_entity
+      render_errors_for(item)
     end
   end
 
-  # PATCH/PUT /items/1
+  # jsonapi_update will use the configured Resource (and adapter) to persist.
+  # This will handle nested relationships as well.
+  # On validation errors, render correct error JSON.
   def update
-    if @item.update(item_params)
-      render json: @item
+    item, success = jsonapi_update.to_a
+
+    if success
+      render_jsonapi(item, scope: false)
     else
-      render json: @item.errors, status: :unprocessable_entity
+      render_errors_for(item)
     end
   end
 
-  # DELETE /items/1
+  # Renders 200 OK with empty meta
+  # http://jsonapi.org/format/#crud-deleting-responses-200
   def destroy
-    @item.destroy
+    item, success = jsonapi_destroy.to_a
+
+    if success
+      render json: { meta: {} }
+    else
+      render_errors_for(item)
+    end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def item_params
-      params.require(:item).permit(:title, :done, :todo_id)
-    end
 end
