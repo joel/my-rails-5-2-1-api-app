@@ -10,6 +10,9 @@ class ItemResource < ApplicationResource
   #
   # === Allow ?filter[name] query parameter ===
   allow_filter :title
+  allow_filter :todo_id do |scope, value|
+    scope.where(todo_id: value)
+  end
   #
   # === Enable total count, when requested ===
   # allow_stat total: [:count]

@@ -10,7 +10,7 @@ class TodoResource < ApplicationResource
   #
   # === Allow ?filter[name] query parameter ===
   # allow_filter :name
-  #
+    
   # === Enable total count, when requested ===
   # allow_stat total: [:count]
   #
