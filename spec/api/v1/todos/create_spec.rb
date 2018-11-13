@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "todos#create", type: :request do
+
   subject(:make_request) do
     jsonapi_post "/api/v1/todos", payload
   end
@@ -11,7 +12,8 @@ RSpec.describe "todos#create", type: :request do
         data: {
           type: 'todos',
           attributes: {
-            # ... your attrs here
+            owner: 'John Doe',
+            title: 'Bucket List'
           }
         }
       }

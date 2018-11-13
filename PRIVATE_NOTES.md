@@ -12,10 +12,12 @@ rails generate migration enable_pgcrypto_extension
 bundle exec rails g scaffold Todo title:string owner:string
 bundle exec rails g factory_bot:model Todo title:string owner:string
 rails generate rspec:request todo
+bin/rails g jsonapi:resource Todo title:string owner:string
 
 bundle exec rails g scaffold Item title:string done:boolean todo:references
 bundle exec rails g factory_bot:model Item title:string done:boolean todo:references 
 rails generate rspec:request item
+bin/rails g jsonapi:resource Item title:string done:boolean todo:references  
 
 pg_ctl -D /usr/local/var/postgres start
 

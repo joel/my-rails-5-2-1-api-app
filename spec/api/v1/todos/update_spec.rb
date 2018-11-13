@@ -14,14 +14,14 @@ RSpec.describe "todos#update", type: :request do
           id: todo.id.to_s,
           type: 'todos',
           attributes: {
-            # ... your attrs here
+            title: 'Bucket List'
           }
         }
       }
     end
 
     # Replace 'xit' with 'it' after adding attributes
-    xit 'updates the resource' do
+    it 'updates the resource' do
       expect {
         make_request
       }.to change { todo.reload.attributes }

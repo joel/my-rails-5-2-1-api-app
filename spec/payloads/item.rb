@@ -30,5 +30,4 @@
 JsonapiSpecHelpers::Payload.register(:item) do
   key(:title, String)
   key(:done, [TrueClass, FalseClass])
-  key(:todo, Reference)
 end

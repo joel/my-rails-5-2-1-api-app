@@ -34,10 +34,12 @@ StrongResources.configure do
   strong_resource :item do
     attribute :title, :string
     attribute :done, :boolean
-    attribute :todo, :references
   end
+  
   strong_resource :todo do
     attribute :title, :string
     attribute :owner, :string
+    
+    has_many :items
   end
 end

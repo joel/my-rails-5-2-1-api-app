@@ -14,7 +14,7 @@ RSpec.describe "todos#index", type: :request do
 
     it 'serializes the list correctly' do
       make_request
-      expect(json_ids(true)).to match_array([todo1.id, todo2.id])
+      expect(json_ids(false)).to match_array([todo1.id, todo2.id])
       assert_payload(:todo, todo1, json_items[0])
       assert_payload(:todo, todo2, json_items[1])
     end

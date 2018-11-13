@@ -19,7 +19,12 @@ class TodoResource < ApplicationResource
   #   foreign_key: :foo_id,
   #   resource: FooResource,
   #   scope: -> { Foo.all }
-  #
+
+  has_many :items,
+    foreign_key: :todo_id,
+    resource: ItemResource,
+    scope: -> { Item.all }
+    
   # === Custom sorting logic ===
   # sort do |scope, att, dir|
   #   ... code ...

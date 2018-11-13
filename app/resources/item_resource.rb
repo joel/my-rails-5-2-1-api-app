@@ -9,17 +9,18 @@ class ItemResource < ApplicationResource
   # Customize your resource here. Some common examples:
   #
   # === Allow ?filter[name] query parameter ===
-  # allow_filter :name
+  allow_filter :title
   #
   # === Enable total count, when requested ===
   # allow_stat total: [:count]
   #
   # === Allow sideloading/sideposting of relationships ===
-  # belongs_to :foo,
-  #   foreign_key: :foo_id,
-  #   resource: FooResource,
-  #   scope: -> { Foo.all }
-  #
+
+  belongs_to :todo,
+    foreign_key: :todo_id,
+    resource: TodoResource,
+    scope: -> { Todo.all }
+
   # === Custom sorting logic ===
   # sort do |scope, att, dir|
   #   ... code ...

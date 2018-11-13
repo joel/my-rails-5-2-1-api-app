@@ -23,13 +23,34 @@ todo = Todo.create_with({
 })
 valid? { todo }
 
-puts("Add Item")
+[
+  'Cuddle next to a campfire.',
+  'Let go of floating lantern.',
+  'Have a paint fight.',
+  'Build a treehouse.',
+  'Back a perfect rainbow cupcake.',
+  'Play hide and seek in ikea.',
+  'Meet my online friends.',
+  'Dance under the Eiffel Tower.',
+  'Get in a taxi and yell “Follow that car!”',
+  'Wish on a shooting star.',
+  'Finish an entire coloring book.',
+  'Make a dreamcatcher.',
+].each do |item|
+  
+  puts("Add Item: #{item}")
 
-item = Item.create_with({
-  todo: todo
-}).find_or_create_by({
-  title: 'Tricycle'
-})
-valid? { item }
+  item = Item.create_with({
+    todo: todo
+  }).find_or_create_by({
+    title: item
+  })
+  valid? { item }
+end
 
 puts("End!...")
+
+
+
+
+  

@@ -4,8 +4,7 @@ RSpec.describe "todos#show", type: :request do
   let(:params) { {} }
 
   subject(:make_request) do
-    jsonapi_get "/api/v1/todos/#{todo.id}",
-      params: params
+    jsonapi_get "/api/v1/todos/#{todo.id}", params: params
   end
 
   describe 'basic fetch' do

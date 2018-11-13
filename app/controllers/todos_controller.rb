@@ -4,7 +4,10 @@ class TodosController < ApplicationController
 
   # Reference a strong resource payload defined in
   # config/initializers/strong_resources.rb
-  strong_resource :todo
+  strong_resource :todo do
+    has_many :items, destroy: true
+  end
+   
   # Run strong parameter validation for these actions.
   # Invalid keys will be dropped.
   # Invalid value types will log or raise based on the configuration
