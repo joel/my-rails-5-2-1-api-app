@@ -3,7 +3,7 @@ https://blog.arkency.com/2014/10/how-to-start-using-uuid-in-activerecord-with-po
 https://lab.io/articles/2017/04/13/uuids-rails-5-1/
 https://blog.codeship.com/building-a-json-api-with-rails-5/
 
-rails new rails-5-2-1-api-sample-2 -T -d postgresql --api
+rails new my-rails-5-2-1-api-app -T -d postgresql --api
 
 rails generate rspec:install
 
