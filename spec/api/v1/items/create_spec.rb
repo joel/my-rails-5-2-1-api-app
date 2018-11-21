@@ -69,8 +69,8 @@ RSpec.describe "items#create", type: :request do
                 "id": "#{todo_id}",
                 "title": "Bucket List",
                 "owner": "John Doe",
-                "created_at": "1989-12-31T23:00:00.000Z",
-                "updated_at": "1989-12-31T23:00:00.000Z"
+                "created_at": "1990-01-01T00:00:00.000Z",
+                "updated_at": "1990-01-01T00:00:00.000Z"
               }
             }
           }
@@ -92,7 +92,7 @@ RSpec.describe "items#create", type: :request do
       }.by(1).and change { 
         Todo.count 
       }.by(1)
-binding.pry
+
       expect(body_response).to eql(JSON.load(full_response.to_json))
     end
   end

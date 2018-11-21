@@ -9,7 +9,6 @@
 def valid?
   unless yield.valid?
     puts("Errors: [#{yield.class.name}] => #{yield.errors.full_messages}")
-    binding.pry
     exit(1)
   end
 end

@@ -28,8 +28,8 @@ RSpec.describe "items#index", type: :request do
               "id": todo.id.to_s,
               "title": "Bucket List",
               "owner": "John Doe",
-              "created_at": "1989-12-31T23:00:00.000Z",
-              "updated_at": "1989-12-31T23:00:00.000Z"
+              "created_at": "1990-01-01T00:00:00.000Z",
+              "updated_at": "1990-01-01T00:00:00.000Z"
             }
           }
         }
