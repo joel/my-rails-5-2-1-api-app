@@ -13,7 +13,9 @@ ENTRYPOINT [ "sh", "/docker-entrypoint.sh"]
 # Add bundle entry point to handle bundle cache
 
 ENV BUNDLE_PATH=/bundle \
-    GEM_HOME=/bundle
+    GEM_HOME=/bundle \
+    BUNDLE_JOBS=10 \
+    BUNDLE_RETRY=3
 
 MAINTAINER Joel AZEMAR <joel.azemar@gmail.com>
 

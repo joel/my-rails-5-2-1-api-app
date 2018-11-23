@@ -2,6 +2,7 @@ https://joesasson.github.io/2017/03/24/setting-up-a-rails-app-with-rspec-and-pos
 https://blog.arkency.com/2014/10/how-to-start-using-uuid-in-activerecord-with-postgresql/
 https://lab.io/articles/2017/04/13/uuids-rails-5-1/
 https://blog.codeship.com/building-a-json-api-with-rails-5/
+https://medium.com/@jfroom/docker-compose-3-bundler-caching-in-dev-9ca1e49ac441
 
 rails new my-rails-5-2-1-api-app -T -d postgresql --api
 
