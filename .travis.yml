@@ -5,7 +5,9 @@ language: ruby
 services:
   - docker
 
-script: docker-compose up -d postgres && docker-compose run --rm api rake
+script: docker-compose up -d postgres && \
+  docker-compose run --rm api rake && \
+  docker run -v "$(pwd)":/code presidentbeef/brakeman --color
 
 before_script:
   - docker-compose run --rm api bundle exec rails db:migrate

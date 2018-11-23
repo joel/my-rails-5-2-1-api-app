@@ -25,3 +25,7 @@ jobs:
           command: |
             docker-compose run --rm api bundle exec rails db:migrate
             docker-compose run --rm api rake
+
+      - run:
+          name: Brakeman
+          command: docker run -v "$(pwd)":/code presidentbeef/brakeman --color
