@@ -39,6 +39,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-byebug'
   gem 'rubocop-rails_config'
+  gem 'bullet'
 end
 
 group :development do

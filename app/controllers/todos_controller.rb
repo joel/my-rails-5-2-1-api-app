@@ -16,7 +16,7 @@ class TodosController < ApplicationController
 
   # Start with a base scope and pass to render_jsonapi
   def index
-    todos = Todo.all
+    todos = Todo.all.includes(:items)
     render_jsonapi(todos)
   end
 
