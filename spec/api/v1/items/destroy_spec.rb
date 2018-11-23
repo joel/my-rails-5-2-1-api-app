@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "items#destroy", type: :request do
+RSpec.describe 'items#destroy', type: :request do
   let!(:todo) { item.todo }
   let(:item)  { create(:item) }
 

@@ -10,7 +10,7 @@ class TodoResource < ApplicationResource
   #
   # === Allow ?filter[name] query parameter ===
   # allow_filter :name
-    
+
   # === Enable total count, when requested ===
   # allow_stat total: [:count]
   #
@@ -24,7 +24,7 @@ class TodoResource < ApplicationResource
     foreign_key: :todo_id,
     resource: ItemResource,
     scope: -> { Item.all }
-    
+
   # === Custom sorting logic ===
   # sort do |scope, att, dir|
   #   ... code ...

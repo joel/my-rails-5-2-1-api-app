@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "todos#update", type: :request do
+RSpec.describe 'todos#update', type: :request do
   subject(:make_request) do
     jsonapi_put "/api/v1/todos/#{todo.id}", payload
   end

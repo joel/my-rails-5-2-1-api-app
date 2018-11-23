@@ -15,7 +15,7 @@
 # * Ensures json['name'] is a string
 #
 # If you have custom serialization logic and want to compare against
-# something other than "record.name", pass a block:
+# something other than 'record.name', pass a block:
 #
 # key(:name) { |record| record.name.upcase }
 #

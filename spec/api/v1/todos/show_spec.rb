@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "todos#show", type: :request do
+RSpec.describe 'todos#show', type: :request do
   let(:params) { {} }
 
   subject(:make_request) do

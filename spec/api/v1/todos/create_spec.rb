@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "todos#create", type: :request do
-
+RSpec.describe 'todos#create', type: :request do
   subject(:make_request) do
-    jsonapi_post "/api/v1/todos", payload
+    jsonapi_post '/api/v1/todos', payload
   end
 
   describe 'basic create' do

@@ -2,7 +2,7 @@
 # We use jsonapi-rb, which is similar to active_model_serializers.
 class SerializableTodo < JSONAPI::Serializable::Resource
   type :todos
-  
+
   # Add attributes here to ensure they get rendered, .e.g.
   #
   # attribute :name
@@ -15,6 +15,6 @@ class SerializableTodo < JSONAPI::Serializable::Resource
   # end
   attribute :title
   attribute :owner
-  
+
   has_many :items
 end

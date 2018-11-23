@@ -7,15 +7,22 @@ Rails.application.load_tasks
 
 require 'rspec'
 require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
 
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
+desc('Codestyle check and linter')
+RuboCop::RakeTask.new('qa:code') do |task|
+  task.options = ['--display-cop-names']
+  task.fail_on_error = true
+  task.patterns = [
+    'lib/**/*.rb',
+    'app/**/*.rb',
+    'spec/*.rb',
+    'spec/support/*.rb',
+    'spec/**/*_spec.rb'
+  ]
 end
 
-RSpec::Core::RakeTask.new('spec:progress') do |spec|
-  spec.rspec_opts = %w(--format progress)
-  spec.pattern = 'spec/**/*_spec.rb'
-end
+desc('Run CI QA tasks')
+task(qa: ['qa:code'])
 
-task default: :spec
-
+task(default: :qa)

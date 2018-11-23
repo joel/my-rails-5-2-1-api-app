@@ -27,3 +27,7 @@ bundle exec rails db:migrate
 bundle exec rails db:seed
 
 bundle exec rails db:drop
+
+
+https://github.com/rails/rails/blob/master/.rubocop.yml
+https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml

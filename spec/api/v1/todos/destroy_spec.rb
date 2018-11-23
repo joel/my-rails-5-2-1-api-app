@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "todos#destroy", type: :request do
+RSpec.describe 'todos#destroy', type: :request do
   subject(:make_request) do
     jsonapi_delete "/api/v1/todos/#{todo.id}"
   end

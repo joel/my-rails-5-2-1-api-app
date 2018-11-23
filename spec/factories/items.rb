@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item do
-    title { "MyString" }
+    title { 'MyString' }
     done  { false }
     todo
   end
