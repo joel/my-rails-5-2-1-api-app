@@ -3,19 +3,24 @@ version: '3.1'
 services:
   postgres:
     image: 'postgres:10.3-alpine'
-    # restart: always
+    restart: always
     volumes:
       - 'postgres:/var/lib/postgresql/data'
     env_file:
       - '.env'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api:
     depends_on:
       - 'postgres'
+    restart: on-failure    
     build: .
     ports:
       - '3008:3008'
-    # restart: always
     volumes:
       - bundle_cache:/bundle
       # Map bundle cache to named volume
@@ -23,6 +28,8 @@ services:
       # Map /app files back to host drive, and visa versa
     env_file:
       - '.env'
+    healthcheck:
+      test: curl -f http://localhost:3008
 
 volumes:
   # Mount volume with default driver
