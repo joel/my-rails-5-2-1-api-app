@@ -1,8 +1,8 @@
 # README
 
-[![Travis CI](https://travis-ci.org/joel/my-rails-5-2-1-api-app.svg?branch=master)
+[![Travis CI](https://travis-ci.org/joel/my-rails-5-2-1-api-app.svg?branch=master)](https://travis-ci.org/joel/my-rails-5-2-1-api-app)
 
-[![CircleCI](https://circleci.com/gh/joel/my-rails-5-2-1-api-app.svg?style=svg)](https://circleci.com/gh/joel/my-rails-5-2-1-api-app)
+[![Circle CI](https://circleci.com/gh/joel/my-rails-5-2-1-api-app.svg?style=svg)](https://circleci.com/gh/joel/my-rails-5-2-1-api-app)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/51aa08d8908ab501d537/maintainability)](https://codeclimate.com/github/joel/my-rails-5-2-1-api-app/maintainability)
 
