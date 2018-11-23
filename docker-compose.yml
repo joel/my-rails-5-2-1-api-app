@@ -1,8 +1,9 @@
-version: '2'
+version: '3.1'
 
 services:
   postgres:
     image: 'postgres:10.3-alpine'
+    # restart: always
     volumes:
       - 'postgres:/var/lib/postgresql/data'
     env_file:
@@ -14,10 +15,16 @@ services:
     build: .
     ports:
       - '3008:3008'
+    # restart: always
     volumes:
-      - '.:/app'
+      - bundle_cache:/bundle
+      # Map bundle cache to named volume
+      - .:/app
+      # Map /app files back to host drive, and visa versa
     env_file:
       - '.env'
 
 volumes:
+  # Mount volume with default driver
+  bundle_cache:
   postgres:

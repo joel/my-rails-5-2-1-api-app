@@ -4,11 +4,17 @@ RUN apk update && apk add build-base postgresql-dev
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
-RUN bundle install && bundle exec rails db:migrate && bundle exec rails db:seed
-
 COPY . .
+# Add app files into docker image
+
+COPY ./docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT [ "sh", "/docker-entrypoint.sh"]
+# Add bundle entry point to handle bundle cache
+
+ENV BUNDLE_PATH=/bundle \
+    GEM_HOME=/bundle
 
 MAINTAINER Joel AZEMAR <joel.azemar@gmail.com>
 
-CMD puma -C config/puma.rb
+CMD [ "/bundle/bin/puma", "-C", "config/puma.rb" ]

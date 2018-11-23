@@ -11,7 +11,11 @@ Things you may want to cover:
 
 * Ruby version
 
+`2.5.3`
+
 * System dependencies
+
+`jsonapi-suite`
 
 * Configuration
 
@@ -21,7 +25,15 @@ Things you may want to cover:
 
 * How to run the test suite
 
+```
+docker-compose run --rm api rake
+```
+
 * Services (job queues, cache servers, search engines, etc.)
+
+```
+docker-compose up
+```
 
 * Deployment instructions
 
