@@ -7,7 +7,8 @@ services:
 
 script: docker-compose up -d postgres && \
   docker-compose run --rm api rake && \
-  docker run -v "$(pwd)":/code presidentbeef/brakeman --color
+  docker-compose exec api /bundle/bin/brakeman
 
 before_script:
   - docker-compose run --rm api bundle exec rails db:migrate
+  - gem install brakeman
