@@ -6,13 +6,13 @@ class ItemResource < ApplicationResource
   type :items
   # Associate to a Model object so we know how to persist.
   model Item
+
   # Customize your resource here. Some common examples:
   #
   # === Allow ?filter[name] query parameter ===
   allow_filter :title
-  allow_filter :todo_id do |scope, value|
-    scope.where(todo_id: value)
-  end
+  allow_filter :todo_id
+
   #
   # === Enable total count, when requested ===
   # allow_stat total: [:count]

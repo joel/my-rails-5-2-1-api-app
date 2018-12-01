@@ -9,6 +9,8 @@ require 'rspec'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 
+ENV['LOG_LEVEL'] = 'info'
+
 desc('Codestyle check and linter')
 RuboCop::RakeTask.new('qa:code') do |task|
   task.options = ['--display-cop-names']

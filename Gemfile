@@ -40,6 +40,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rubocop-rails_config'
   gem 'bullet'
+  gem 'did_you_mean'
 end
 
 group :development do

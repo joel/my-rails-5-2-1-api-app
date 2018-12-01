@@ -1,50 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe 'items#show', type: :request do
-  let!(:todo) { create(:todo, title: 'Bucket List', owner: 'John Doe') }
-  let(:item)  { create(:item, title: 'Tricycle') }
+  let(:todo) { create(:todo, title: 'Bucket List', owner: 'John Doe') }
+  let(:item) { create(:item, title: 'Tricycle') }
 
-  before { todo.items << item }
+  before do
+    Timecop.freeze(Time.local(1990))
+    todo.items << item
+  end
 
-  subject(:make_request) { jsonapi_get "/api/v1/todos/#{todo.id}?include=items" }
+  subject(:make_request) { jsonapi_get "/api/v1/items/#{item.id}" }
 
   let(:full_response) do
     {
       'data': {
-        'id': todo.id.to_s,
-        'type': 'todos',
+        'id': item.id.to_s,
+        'type': 'items',
         'attributes': {
-          'title': 'Bucket List',
-          'owner': 'John Doe'
-        },
-        'relationships': {
-          'items': {
-            'data': [
-              {
-                'type': 'items',
-                'id': item.id.to_s
-              }
-            ]
+          'done': false,
+          'title': 'Tricycle',
+          'todo': {
+            'id': todo.id.to_s,
+            'title': 'Bucket List',
+            'owner': 'John Doe',
+            'created_at': '1990-01-01T00:00:00.000Z',
+            'updated_at': '1990-01-01T00:00:00.000Z'
           }
         }
       },
-      'included': [
-        {
-          'id': item.id.to_s,
-          'type': 'items',
-          'attributes': {
-            'title': 'Tricycle',
-            'done': false,
-            'todo': {
-              'id': todo.id.to_s,
-              'title': 'Bucket List',
-              'owner': 'John Doe',
-              'created_at': '2018-11-11T19:10:22.106Z',
-              'updated_at': '2018-11-11T19:10:22.130Z'
-            }
-          }
-        }
-      ],
       'meta': {},
       'jsonapi': {
         'version': '1.0'

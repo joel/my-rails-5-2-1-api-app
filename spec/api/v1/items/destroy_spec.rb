@@ -5,37 +5,10 @@ RSpec.describe 'items#destroy', type: :request do
   let(:item)  { create(:item) }
 
   subject(:make_request) do
-    jsonapi_put "/api/v1/todos/#{todo.id}", payload
+    jsonapi_delete "/api/v1/items/#{item.id}"
   end
 
   describe 'basic update' do
-    let(:payload) do
-      {
-        data: {
-          id: todo.id.to_s,
-          type: 'todos',
-          attributes: {
-            owner: 'John Doe',
-            title: 'Bucket List'
-          },
-          relationships: {
-            items: {
-              data: [
-                { type: 'items', id: item.id.to_s, method: 'destroy' }
-              ]
-            }
-          }
-        },
-        included: [
-          {
-            type: 'items',
-            id: item.id.to_s,
-            attributes: { title: 'Tricycle' },
-          }
-        ]
-      }
-    end
-
     it 'updates the resource' do
       expect {
         make_request

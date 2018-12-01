@@ -16,13 +16,13 @@ RSpec.describe 'Items', type: :request do
 
   describe 'GET /items' do
     it 'works! (now write some real specs)' do
-      get todo_items_path(todo), params: {}, headers: headers
+      get items_path, params: {}, headers: headers
       expect(response).to have_http_status(200)
       expect(json_ids(false)).to match_array([item.id, crazy_item.id])
     end
 
     it 'works! (now write some real specs)' do
-      get todo_items_path(todo), params: { 'filter[todo_id]': todo.id.to_s }, headers: headers
+      get items_path, params: { 'filter[todo_id]': todo.id.to_s }, headers: headers
       expect(response).to have_http_status(200)
       expect(json_ids(false)).to match_array([item.id])
     end
@@ -30,7 +30,7 @@ RSpec.describe 'Items', type: :request do
 
   describe 'SHOW /items' do
     it 'works! (now write some real specs)' do
-      get todo_items_path(todo, item), params: {}, headers: headers
+      get items_path(item), params: {}, headers: headers
       expect(response).to have_http_status(200)
     end
   end

@@ -30,6 +30,9 @@
 # end
 #
 # For additional documentation, see https://jsonapi-suite.github.io/strong_resources
+
+ActionController::Parameters.action_on_invalid_parameters = :raise
+
 StrongResources.configure do
   strong_resource :item do
     attribute :title, :string

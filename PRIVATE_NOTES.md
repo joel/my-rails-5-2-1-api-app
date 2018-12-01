@@ -31,3 +31,6 @@ bundle exec rails db:drop
 
 https://github.com/rails/rails/blob/master/.rubocop.yml
 https://github.com/rubocop-hq/rubocop/blob/master/config/default.yml
+
+# JSON API Suite doesn't handle nested routes 
+https://github.com/jsonapi-suite/jsonapi_compliable/issues/25

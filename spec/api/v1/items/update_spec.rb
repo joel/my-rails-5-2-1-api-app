@@ -1,78 +1,48 @@
 require 'rails_helper'
 
 RSpec.describe 'items#update', type: :request do
-  let!(:todo) { item.todo }
-  let(:item)  { create(:item) }
+  let(:todo) { create(:todo, title: 'Bucket List', owner: 'John Doe') }
+  let(:item) { create(:item, title: 'Tricycle') }
+
+  before do
+    Timecop.freeze(Time.local(1990))
+    todo.items << item
+  end
 
   subject(:make_request) do
-    jsonapi_put "/api/v1/todos/#{todo.id}", payload
+    jsonapi_put "/api/v1/items/#{item.id}", payload
   end
 
   describe 'basic update' do
     let(:payload) do
       {
         data: {
-          id: todo.id.to_s,
-          type: 'todos',
+          id: item.id.to_s,
+          type: 'items:s',
           attributes: {
-            owner: 'John Doe',
-            title: 'Bucket List'
-          },
-          relationships: {
-            items: {
-              data: [
-                { type: 'items', id: item.id.to_s, method: 'update' }
-              ]
-            }
+            done: true
           }
-        },
-        included: [
-          {
-            type: 'items',
-            id: item.id.to_s,
-            attributes: { title: 'Tricycle' },
-          }
-        ]
+        }
       }
     end
 
     let(:full_response) do
       {
         'data': {
-          'id': todo.id.to_s,
-          'type': 'todos',
+          'id': item.id.to_s,
+          'type': 'items',
           'attributes': {
-            'title': 'Bucket List',
-            'owner': 'John Doe'
-          },
-          'relationships': {
-            'items': {
-              'data': [
-                {
-                  'type': 'items',
-                  'id': item.id.to_s
-                }
-              ]
+            'done': true,
+            'title': 'Tricycle',
+            'todo': {
+              'id': todo.id.to_s,
+              'title': 'Bucket List',
+              'owner': 'John Doe',
+              'created_at': '1990-01-01T00:00:00.000Z',
+              'updated_at': '1990-01-01T00:00:00.000Z'
             }
           }
         },
-        'included': [
-          {
-            'id': item.id.to_s,
-            'type': 'items',
-            'attributes': {
-              'title': 'Tricycle',
-              'done': false,
-              'todo': {
-                'id': todo.id.to_s,
-                'title': 'Bucket List',
-                'owner': 'John Doe',
-                'created_at': '2018-11-11T19:10:22.106Z',
-                'updated_at': '2018-11-11T19:10:22.130Z'
-              }
-            }
-          }
-        ],
         'meta': {},
         'jsonapi': {
           'version': '1.0'
@@ -86,12 +56,8 @@ RSpec.describe 'items#update', type: :request do
       expect {
         make_request
       }.to change {
-        todo.reload.attributes['title']
-      }.to('Bucket List').and change {
-        todo.reload.attributes['owner']
-      }.to('John Doe').and change {
-        item.reload.attributes['title']
-      }.to('Tricycle')
+        item.reload.done
+      }.to(true)
 
       expect(body_response['data']).to include(JSON.load(full_response.to_json)['data'])
     end

@@ -4,8 +4,7 @@ RSpec.describe 'todos#index', type: :request do
   let(:params) { {} }
 
   subject(:make_request) do
-    jsonapi_get '/api/v1/todos',
-      params: params
+    jsonapi_get '/api/v1/todos', params: params
   end
 
   describe 'basic fetch' do

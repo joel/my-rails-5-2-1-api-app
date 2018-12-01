@@ -2,6 +2,9 @@ sudo: required
 
 language: ruby
 
+rvm:
+  - 2.5.3
+  
 services:
   - docker
 
