@@ -8,10 +8,17 @@ rvm:
 services:
   - docker
 
-script: docker-compose up -d postgres && \
-  docker-compose run --rm api rake && \
-  docker-compose exec api /bundle/bin/brakeman
+script: 
+  - docker-compose up -d postgres && docker-compose run --rm api rake
+  # don't use bundle exec to use locally installed versions
+  - brakeman -z
+  - bundle-audit
 
 before_script:
   - docker-compose run --rm api bundle exec rails db:migrate
+  # install gems manually to ensure they are installed locally
+  # travis won't have these, so this will install whatever the
+  # latest is for your Ruby version
   - gem install brakeman
+  - gem install bundle-audit
+  - bundle-audit update # ensure we have the latest vulnerability database
