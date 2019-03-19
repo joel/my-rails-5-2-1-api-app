@@ -9,7 +9,7 @@ COPY . .
 
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT [ "sh", "/docker-entrypoint.sh"]
+ENTRYPOINT [ "sh", "/docker-entrypoint.sh" ]
 # Add bundle entry point to handle bundle cache
 
 ENV BUNDLE_PATH=/bundle \

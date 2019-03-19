@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -28,7 +28,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'jsonapi_suite', '~> 0.7'
 gem 'jsonapi-rails', '~> 0.3.1'
-gem 'kaminari',      '~> 1.1.1'
+gem 'kaminari'
 
 gem 'tzinfo-data'
 

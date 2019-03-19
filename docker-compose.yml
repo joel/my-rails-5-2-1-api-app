@@ -20,7 +20,7 @@ services:
     restart: on-failure
     build: .
     ports:
-      - '3008:3008'
+      - '3000:3000'
     volumes:
       - bundle_cache:/bundle
       # Map bundle cache to named volume
@@ -29,7 +29,7 @@ services:
     env_file:
       - '.env'
     healthcheck:
-      test: curl -f http://localhost:3008
+      test: curl -f http://localhost:3000
 
 volumes:
   # Mount volume with default driver
